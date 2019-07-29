@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+	
+<mapper namespace="com.dbteam.mapper.imageMapper">
+
+	<select id="getImage" parameterType="int" resultType="com.dbteam.beans.imageProduct">
+			SELECT * FROM imagestable 
+				WHERE 
+					conly=#{only}
+	</select>
+
+	<insert id="addImage" parameterType="imageProduct">
+		INSERT INTO imagestable(conly,shijian,images) 
+			VALUES(#{only},#{shijian},#{images})
+	
+	</insert>
+
+
+
+
+
+
+
+
+
+
+
+<!--  
+<select id="selectImage"  resultMap="swbBean" >
+	
+	select id,hostelId,only,checkTime,shijian,only_
+	from swbtable,imagestable where only=only_ and where id=#{id}
+</select>
+
+
+<resultMap type="com.dbteam.beans.Swb" id="swbBean">
+	<id property="id" column="id"/>
+	<result column="hostelId" property="hostelId"/>
+		<result column="hostelGrade" property="hostelGrade"/>
+		<result column="checkTime" property="checkTime"/>
+		<result column="hostelItem" property="hostelItem"/>
+		<result column="deductMarkScause" property="deductMarkScause"/>
+		<result column="image" property="image"/>
+		<result column="only" property="only"/>
+	<collection property="imageproduct" ofType="com.dbteam.beans.imageProduct">
+		<id column="id_" property="id"/>
+		<result column="only_" property="only"/>
+		<result column="shijian" property="shijian"/>
+		<result column="images" property="images"/>
+	</collection>
+	
+	
+
+</resultMap>
+
+-->
+
+
+<!--  
+	<resultMap type="com.dbteam.beans.Swb" id="swbBean">
+		<id column="tid" property="id" /> 
+		<result column="hostelId" property="hostelId"/>
+		<result column="hostelGrade" property="hostelGrade"/>
+		<result column="checkTime" property="checkTime"/>
+		<result column="hostelItem" property="hostelItem"/>
+		<result column="deductMarkScause" property="deductMarkScause"/>
+		<result column="image" property="image"/>
+		<result column="tonly" property="only"/>
+		
+	<collection property="imageproduct" ofType="com.dbteam.beans.imageProduct" column="id">
+		<id column="sid" property="id" />
+		<result column="sonly" property="only"/>
+		<result column="shijian" property="shijian"/>
+		<result column="images" property="images"/>
+	</collection>
+	
+	</resultMap>
+
+	
+	
+	<select id="selectImage" resultMap="swbBean">
+	
+		SELECT
+			c.*,p.*,t.id 'tid',s.id 'sid',
+			s.only 'sonly',t.only 'tonly'  
+			FROM  swbtable t   
+			left join imagestable s 
+			where t.only=s.only AND  t.id= #{id}
+	</select>
+-->	
+</mapper>

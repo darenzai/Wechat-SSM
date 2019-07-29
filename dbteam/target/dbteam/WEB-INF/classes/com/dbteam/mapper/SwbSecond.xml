@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper  namespace="com.dbteam.mapper.SwbSecondMapper">
+			
+			<!-- 开启二级缓存 -->
+			
+	
+	<select id="getSwbSecond" parameterType="int" resultType="java.lang.Boolean">
+		SELECT 
+			count(hostelId) 
+		FROM 
+			swbtablesecond 
+		WHERE 
+			hostelId= #{hostelId}
+	</select>
+	
+	<insert id="addSwbSecond" parameterType="Swb">
+		INSERT INTO 
+			swbtablesecond(hostelId,hostelGrade,checkTime,hostelItem,deductMarkScause) 
+				VALUES(#{hostelId},#{hostelGrade},#{checkTime},#{hostelItem},#{deductMarkScause})
+	</insert>
+	
+	
+	<delete id="deleteSwbSecond" parameterType="int">
+		DELETE 
+			FROM 
+				swbtablesecond 
+			WHERE 
+				hostelId=#{hostelId} 
+	</delete>
+	
+	<select id="allSwbSecond" parameterType="int" resultType="com.dbteam.beans.Swb">
+		SELECT * FROM swbtablesecond order by hostelId asc
+	</select>
+	
+	<update id="updateSwbSecond">
+		UPDATE 	
+			swbtablesecond 
+		SET 
+			checkTime="暂无",hostelItem=0,hostelGrade="-1",deductMarkScause="暂无"  
+		WHERE 
+			hostelId=#{hostelId}
+	</update>
+</mapper>

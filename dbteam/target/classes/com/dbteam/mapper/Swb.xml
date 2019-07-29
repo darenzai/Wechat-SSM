@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+
+	
+	
+	
+	
+	<mapper namespace="com.dbteam.mapper.SwbMapper">
+	   	<insert id="add" parameterType="Swb">
+	   		INSERT INTO 
+	   			swbtable(hostelId, hostelGrade,checkTime,hostelItem,deductMarkScause,image,only)
+	   		VALUES(#{hostelId},#{hostelGrade},#{checkTime},#{hostelItem},#{deductMarkScause},#{image},#{only})
+	   		
+	   		
+	   	</insert> 
+	   	
+	   	<update id="update" parameterType="Swb">
+	   		UPDATE 
+	   			swbtable 
+	   		SET 
+	   			hostelId=#{hostelId},hostelGrade=#{hostelGrade},checkTime=#{checkTime},hostelItem=#{hostelItem},deductMarkScause=#{deductMarkScause} 
+	   		WHERE 
+	   			id=#{id}
+	   	</update>   
+	   	
+	   	
+	   	<delete id="delete" parameterType="Swb">
+	   		DELETE 
+	   			FROM 
+	   				swbtable 
+	   			WHERE 
+	   				id=#{id}
+	   	</delete>
+	   	
+	   	<select id="get" parameterType="int" resultMap="MySwb">
+	   		<!-- select * from swbtable where hostelId= #{hostelId}  order by id desc -->
+	   		
+	   		SELECT  
+	   			s.*,i.conly,i.images  
+	   		FROM 
+	   			swbtable s LEFT JOIN imagestable i 
+	   		ON 
+	   			s.only=i.conly
+	   		
+	   		WHERE 
+	   			
+	   			hostelId= #{hostelId}  order by id desc
+	   		
+	   	
+	   	</select>
+	   	
+	   	<select id="list" parameterType="Swb" resultType="com.dbteam.beans.Swb"> 
+	   		SELECT * FROM swbtable order by id desc
+	   	</select>
+	   	
+	
+	   	<select id="gettime" parameterType="int" resultType="java.lang.String">
+	   		
+	   		SELECT id,checkTime,only 
+	   			FROM 
+	   				swbtable 
+	   			WHERE 
+	   				id=#{id}
+	   		
+	   	</select>
+	   	
+	   	
+	   	<resultMap type="com.dbteam.beans.Swb" id="MySwb">
+	   		<id column="id" property="id"/>
+	   		<result column="hostelId" property="hostelId"/>
+	   		<result column="hostelGrade" property="hostelGrade"/>
+	   		<result column="hostelItem" property="hostelItem"/>
+	   		<result column="deductMarkScause" property="deductMarkScause"/>
+	   		<result column="only" property="only"/>
+	   		<result column="image" property="image"/>
+	   		<result column="checkTime" property="checkTime"/>
+	   		<collection property="imageproduct1" ofType="com.dbteam.beans.imageProduct">
+	   			<id column="cid" property="id"/>
+	   			<result column="conly" property="only"/>
+	   			<result column="shijian" property="shijian"/>
+	   			<result column="images" property="images"/>
+	   		</collection>
+	   	
+	   	</resultMap>
+	   	
+	   	
+	   	<select id="listimage" resultMap="MySwb">
+	   		SELECT  
+	   			s.*,i.*  
+	   		FROM 
+	   			swbtable s LEFT JOIN imagestable i 
+	   		ON 
+	   			s.only=i.conly
+	   	</select>
+	   	
+	</mapper>
+

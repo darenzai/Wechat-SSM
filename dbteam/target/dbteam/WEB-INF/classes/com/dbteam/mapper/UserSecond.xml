@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbteam.mapper.UserSecondMapper">
+    			<cache eviction="LRU" flushInterval="60000"></cache>
+    
+
+	<insert id="addUser" parameterType="UserSecond">
+
+		INSERT INTO
+			usersecond(userName,userWeChatName,userPhone,workPosition,remark)
+		VALUES
+			(#{userName},#{userWeChatName},#{userPhone},#{workPosition},#{remark})
+	</insert>
+
+
+	<select id="selectName" parameterType="java.lang.Integer"
+		resultType="java.lang.Boolean">
+
+		SELECT
+			 count(userWeChatName) 
+		FROM 
+			usersecond 
+		WHERE 
+			id= #{id}
+	</select>
+
+
+	<select id="selectAll" parameterType="String"
+		resultType="com.dbteam.beans.UserSecond">
+		SELECT * FROM 
+			usersecond 
+		WHERE 
+			userWeChatName= #{userWeChatName}
+	</select>
+	
+	
+	<update id="updateSecondUser" parameterType="UserSecond">
+	
+		UPDATE 
+				usersecond
+		SET
+			avatarUrl=#{avatarUrl}
+		WHERE
+			userWeChatName=#{userWeChatName}
+			
+					
+	
+	</update>
+	
+	
+	
+	<select id="allSecondUser" parameterType="String" resultType="com.dbteam.beans.UserSecond">
+		
+		SELECT * FROM usersecond
+	
+	</select>
+	
+	
+	<delete id="deleteSecondUser" parameterType="java.lang.Integer" >
+		 DELETE 
+		 	FROM 
+		 		usersecond 
+		 	WHERE 
+		 		id=#{id}
+	</delete>
+	
+	<update id="updateUserInformation" parameterType="java.lang.Integer">
+	
+		UPDATE
+			usersecond
+		SET
+			userName=#{userName},userWeChatName=#{userWeChatName},userPhone=#{userPhone},workPosition=#{workPosition},remark=#{remark}
+	 	WHERE
+	 		id=#{id}
+	</update>
+	
+	
+	<select id="selectUserName" parameterType="String"
+		resultType="com.dbteam.beans.UserSecond">
+
+		SELECT
+			  *
+		FROM 
+			usersecond 
+		WHERE 
+			userName= #{userName}
+	</select>
+	
+</mapper>
+
+

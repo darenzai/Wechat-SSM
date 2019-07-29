@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.dbteam.mapper.noticeBarTextMapper">
+	
+		<insert id="addNoticBarText" parameterType="noticBar">
+				INSERT 
+					INTO	
+						noticbar(text,textTime)
+					VALUES
+						(#{text},#{textTime})
+		
+		</insert>
+		
+		
+		<select id="getNoticBarText" resultType="com.dbteam.beans.noticBar">
+		
+			SELECT *
+				FROM 
+					noticbar
+		</select>
+		
+		
+		<update id="updateNoticBarText" parameterType="noticBar">
+			
+			UPDATE
+				noticbar
+			SET
+				text=#{text},textTime=#{textTime}
+			WHERE
+				id=#{id}
+				
+		
+		</update>
+		
+		
+		<delete id="deleteNoticBarText" parameterType="java.lang.Integer">
+				
+			DELETE	
+				FROM
+					noticbar
+				WHERE
+					id= #{id}
+		
+		</delete>
+		
+		
+	
+	</mapper>
