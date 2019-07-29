@@ -7,7 +7,7 @@
 # 	 SSM小程序
 
 
-
+dbteam是后端代码 first是小程序代码
 
 
 ![](https://ws3.sinaimg.cn/large/005BYqpggy1g3akkdp1z7j31bv0pegsn.jpg)
